@@ -1,0 +1,55 @@
+#+STARTUP: showall indent hidestars
+
+#+PROPERTY: header-args :exports code :eval never
+
+
+* Use with org-mode
+
+- This should be added to ~init.el~:
+  #+BEGIN_SRC emacs-lisp
+    (require 'ox-beamer)
+    (unless (assoc "jptest" org-latex-classes)
+      (add-to-list 'org-latex-classes
+                   '("jptest"
+                     "\\documentclass{jptest}
+    \\usepackage[AUTO]{inputenc}
+    [NO-DEFAULT-PACKAGES]
+    [EXTRA]
+    \\usepackage{hyperref}
+    \\usepackage{bookmark}
+    [PACKAGES]
+    "
+             ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))))
+
+  #+END_SRC
+  
+  The sectioning should be replaced by a function. See the
+  documentation of variable '~org-latex-classes~'.
+
+- The header of an Org file using the ~jptest~ class might include:
+  #+BEGIN_SRC org
+    ,#+LATEX_CLASS: jptest
+    ,#+LATEX_CLASS_OPTIONS: [a4paper, 11pt]
+
+    ,#+LATEX_HEADER: \subject{Microeconomía}
+    ,#+LATEX_HEADER: \testdate{2016-03-07}
+    ,#+LATEX_HEADER: \testname{Primer test}
+    ,#+LATEX_HEADER: \qnumber{10}
+    ,#+LATEX_HEADER: \usepackage{jpmicro}
+    ,#+LANGUAGE: es
+
+    ,#+OPTIONS: toc:nil title:nil ':t
+  #+END_SRC
+  
+  Perhaps, I should define new Org keywords for the subject, test
+  name, test date, and number of questions. What about code that fill
+  the number of questions automatically.
+
+* Things to do [0/0]
+- [ ] Makefile
+- [ ] Test cases
+- [ ] Populate jpmicro
+- [ ] Add hooks allowing a user designing a cover sheet, the header
+  and so on.
