@@ -1,19 +1,22 @@
 % Identification
 % ============================================================
 \NeedsTeXFormat{LaTeX2e}[1996/06/01]
-\ProvidesPackage{jpmicro}[2016/02/25 Macros for Microeconomics]
+\ProvidesPackage{jpmath}[2016/02/27 Macros for mathematics]
 
 
 % Preliminary declarations
 % ============================================================
 
+
 % Options
 % ============================================================
 
 
-\RequirePackage{jpmath}
+\RequirePackage{latexsym}
+\RequirePackage{amssymb}
+\RequirePackage{mathtools}
+\mathtoolsset{mathic}
 
 % More declarations
 % ============================================================
-\newcommand*{\IMg}{\mname{IMg}}
-\newcommand*{\CMg}{\mname{CMg}}
+\newcommand*{\mname}[1]{\mathit{#1}}

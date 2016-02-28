@@ -29,10 +29,10 @@
 
 \RequirePackage[normalem]{ulem}
 \RequirePackage[full]{textcomp}
-\RequirePackage{latexsym}
-\RequirePackage{amssymb}
-\RequirePackage{mathtools}
-\mathtoolsset{mathic}
+
+% Math
+% ------------------------------------------------------------
+\RequirePackage{jpmath}
 
 
 % Fonts
