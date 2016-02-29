@@ -17,6 +17,203 @@
 \RequirePackage{mathtools}
 \mathtoolsset{mathic}
 
+\RequirePackage{xparse}
+
 % More declarations
 % ============================================================
-\newcommand*{\mname}[1]{\mathit{#1}}
+
+% Enclose text between two \quad's
+\newcommand*{\qtext}[1]{\quad\text{#1}\quad}
+
+
+% Macro for defining function names
+% While we're at it, please allow me to point out that when
+% "romanizing" multi-letter suffixes (like, say, "fin" for "final"),
+% it's advisable to go for \textnormal rather than \mathrm, because
+% the latter just renders a bunch of Roman characters side-by-side,
+% without optimizing the spacing to make them look like the
+% abbreviation to a single word.
+
+% \textnormal{#1} is basically \text{\normalfont #1} with some more
+% tweaks. Therefore you use \textnormal for sin, but \text for if and
+% only if. The reason is that sin should be upright even in for instance
+% a theorem statement, whereas if and only if as a part of a displayed
+% equation should be italic in a theorem statement (given you typeset
+% theorems in italics)
+
+% That's of course correct. But if you wanted to define it manually,
+% \mathop{\textnormal{sin}} would be much better than
+% \mathop{\text{sin}}
+
+
+\newcommand*{\mnameb}[1]{\mathit{#1}}
+% \newcommand*{\mname}[1]{\textnormal{\textit{#1}}}
+
+\DeclareDocumentCommand \mname { s o m } {
+  \IfBooleanTF{#1}{ %
+    % Starred
+    \IfValueTF{#2} {%
+      % With subscript
+      \textnormal{#3}_{\textnormal{#2}}
+    }{%
+      % Without subscript
+      \textnormal{#3}
+    }
+  }{%
+    % Unstarred
+    \IfValueTF{#2} {%
+      % With subscript
+      \textnormal{\textit{#3}}_{\textnormal{#2}}
+    }{%
+      % Without subscript
+      \textnormal{\textit{#3}}
+    }
+  }
+}
+
+
+
+% Replacement for bar: from a post by Hendrik Vogt:
+% http://tex.stackexchange.com/a/60253
+\let\save@mathaccent\mathaccent
+\newcommand*\if@single[3]{%
+  \setbox0\hbox{${\mathaccent"0362{#1}}^H$}%
+  \setbox2\hbox{${\mathaccent"0362{\kern0pt#1}}^H$}%
+  \ifdim\ht0=\ht2 #3\else #2\fi
+  }
+%The bar will be moved to the right by a half of \macc@kerna, which is computed by amsmath:
+\newcommand*\rel@kern[1]{\kern#1\dimexpr\macc@kerna}
+%If there's a superscript following the bar, then no negative kern may follow the bar;
+%an additional {} makes sure that the superscript is high enough in this case:
+\newcommand*\widebar[1]{\@ifnextchar^{{\wide@bar{#1}{0}}}{\wide@bar{#1}{1}}}
+%Use a separate algorithm for single symbols:
+\newcommand*\wide@bar[2]{\if@single{#1}{\wide@bar@{#1}{#2}{1}}{\wide@bar@{#1}{#2}{2}}}
+\newcommand*\wide@bar@[3]{%
+  \begingroup
+  \def\mathaccent##1##2{%
+%Enable nesting of accents:
+    \let\mathaccent\save@mathaccent
+%If there's more than a single symbol, use the first character instead (see below):
+    \if#32 \let\macc@nucleus\first@char \fi
+%Determine the italic correction:
+    \setbox\z@\hbox{$\macc@style{\macc@nucleus}_{}$}%
+    \setbox\tw@\hbox{$\macc@style{\macc@nucleus}{}_{}$}%
+    \dimen@\wd\tw@
+    \advance\dimen@-\wd\z@
+%Now \dimen@ is the italic correction of the symbol.
+    \divide\dimen@ 3
+    \@tempdima\wd\tw@
+    \advance\@tempdima-\scriptspace
+%Now \@tempdima is the width of the symbol.
+    \divide\@tempdima 10
+    \advance\dimen@-\@tempdima
+%Now \dimen@ = (italic correction / 3) - (Breite / 10)
+    \ifdim\dimen@>\z@ \dimen@0pt\fi
+%The bar will be shortened in the case \dimen@<0 !
+    \rel@kern{0.6}\kern-\dimen@
+    \if#31
+      \overline{\rel@kern{-0.6}\kern\dimen@\macc@nucleus\rel@kern{0.4}\kern\dimen@}%
+      \advance\dimen@0.4\dimexpr\macc@kerna
+%Place the combined final kern (-\dimen@) if it is >0 or if a superscript follows:
+      \let\final@kern#2%
+      \ifdim\dimen@<\z@ \let\final@kern1\fi
+      \if\final@kern1 \kern-\dimen@\fi
+    \else
+      \overline{\rel@kern{-0.6}\kern\dimen@#1}%
+    \fi
+  }%
+  \macc@depth\@ne
+  \let\math@bgroup\@empty \let\math@egroup\macc@set@skewchar
+  \mathsurround\z@ \frozen@everymath{\mathgroup\macc@group\relax}%
+  \macc@set@skewchar\relax
+  \let\mathaccentV\macc@nested@a
+%The following initialises \macc@kerna and calls \mathaccent:
+  \if#31
+    \macc@nested@a\relax111{#1}%
+  \else
+%If the argument consists of more than one symbol, and if the first token is
+%a letter, use that letter for the computations:
+    \def\gobble@till@marker##1\endmarker{}%
+    \futurelet\first@char\gobble@till@marker#1\endmarker
+    \ifcat\noexpand\first@char A\else
+      \def\first@char{}%
+    \fi
+    \macc@nested@a\relax111{\first@char}%
+  \fi
+  \endgroup
+}
+
+
+% diff operator
+\newcommand*{\diff}{\mathop{}\!\mathrm{d}}
+
+\DeclareDocumentCommand \deriv { o m g } {
+  \IfNoValueTF{#1} {%
+    % No Power
+    \IfNoValueTF{#3} {%
+      % Without f(x)
+      \frac{\diff}{\diff #2}\,
+    }{%
+      % With f(x)
+      \frac{\diff #2}{\diff #3}
+    }
+  }{%
+    % Power
+    \IfNoValueTF{#3} {%
+      % Without f(x)
+      \frac{\diff^{#1}}{\diff #2^{#1}}\,
+    }{%
+      % With f(x)
+      \frac{\diff^{#1} #2}{\diff #3^{#1}}
+    }
+  }
+}
+
+\DeclareDocumentCommand \pderiv { o m g } {
+  \IfNoValueTF{#1} {%
+    % No Power
+    \IfNoValueTF{#3} {%
+      % Without f(x)
+      \frac{\partial}{\partial #2}\,
+    }{%
+      % With f(x)
+      \frac{\partial #2}{\partial #3}
+    }
+  }{%
+    % Power
+    \IfNoValueTF{#3} {%
+      % Without f(x)
+      \frac{\partial^{#1}}{\partial #2^{#1}}\,
+    }{%
+      % With f(x)
+      \frac{\partial^{#1} #2}{\partial #3^{#1}}
+    }
+  }
+}
+
+\DeclareDocumentCommand \pxderiv { m m g } {
+    \IfNoValueTF{#3} {%
+      % Without f(x)
+      \frac{\partial^2}{\partial #1\, \partial #2}\,
+    }{%
+      % With f(x)
+      \frac{\partial^2 #1}{\partial #2\, \partial #3}
+    }
+}
+
+
+\newcommand*{\incr}{\mathop{}\!\Delta}
+\newcommand*{\iratio}[2]{\frac{\incr #1}{\incr #2}}
+
+
+\newcommand*{\incrpct}{\mathop{}\!\Delta\%}
+\newcommand*{\ipctratio}[2]{\frac{\incrpct #1}{\incrpct #2}}
+
+\DeclarePairedDelimiter\@abs{\lvert}{\rvert}
+
+\newcommand*{\abs}[1]{\@abs*{#1}}
+
+% \iratio
+% \ipctratio
+% \eval
+
