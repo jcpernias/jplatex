@@ -23,28 +23,39 @@
 \newcommand*{\ielast}[2]{\iratio{#1}{#2}\frac{#2}{#1}}
 
 
+\newcommand*{\jp@mkname}[2]{%
+  \expandafter\newcommand\csname #1\endcsname{\mname{#2}}}
+
+\DeclareDocumentCommand \jp@mkname {m g} {%
+  \IfValueTF{#2} {%
+    \expandafter\newcommand\csname #1\endcsname{\mname{#2}}
+  }{%
+    \expandafter\newcommand\csname #1\endcsname{\mname{#1}}
+  }
+}
+
 % Revenues
-\newcommand*{\IT}{\mname{I}}
-\newcommand*{\IMg}{\mname{IMg}}
-\newcommand*{\IMe}{\mname{IMe}}
+\jp@mkname{IT}{I}
+\jp@mkname{IMg}
+\jp@mkname{IMe}
 
 % Expenditures
-\newcommand*{\GT}{\mname{G}}
-\newcommand*{\GMg}{\mname{GMg}}
-\newcommand*{\GMe}{\mname{GMe}}
+\jp@mkname{GT}{G}
+\jp@mkname{GMg}
+\jp@mkname{GMe}
 
 % Costs
-\newcommand*{\CT}{\mname{C}}
-\newcommand*{\CMg}{\mname{CMg}}
-\newcommand*{\CMe}{\mname{CMe}}
-\newcommand*{\CV}{\mname{CV}}
-\newcommand*{\CF}{\mname{CF}}
-\newcommand*{\CVMe}{\mname{CVMe}}
-\newcommand*{\CFMe}{\mname{CFMe}}
+\jp@mkname{CT}{C}
+\jp@mkname{CMg}
+\jp@mkname{CMe}
+\jp@mkname{CV}
+\jp@mkname{CF}
+\jp@mkname{CVMe}
+\jp@mkname{CFMe}
 
 % Average and Marginal Product
-\newcommand*{\PMe}{\mname{PMe}}
-\newcommand*{\PMg}{\mname{PMg}}
+\jp@mkname{PMe}
+\jp@mkname{PMg}
 
 % Returns of the marginal product
-\newcommand*{\IPMg}{\mname{IPMg}}
+\jp@mkname{IPMg}
