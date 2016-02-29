@@ -209,9 +209,11 @@
 \newcommand*{\incrpct}{\mathop{}\!\Delta\%}
 \newcommand*{\ipctratio}[2]{\frac{\incrpct #1}{\incrpct #2}}
 
-\DeclarePairedDelimiter\@abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\jpmath@abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\jpmath@eval{.}{\rvert}
 
-\newcommand*{\abs}[1]{\@abs*{#1}}
+\newcommand*{\abs}[1]{\jpmath@abs*{#1}}
+\newcommand*{\eval}[2]{\jpmath@eval*{#1}_{#2}}
 
 % \iratio
 % \ipctratio
