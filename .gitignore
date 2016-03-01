@@ -2,3 +2,10 @@
 *.log
 *.aux
 *.synctex.gz
+*.glo
+*.gls
+*.ilg
+*.idx
+*.ind
+*.toc
+*.pdf
