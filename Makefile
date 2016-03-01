@@ -5,13 +5,18 @@ pdf := $(pkgname).pdf
 ins := $(pkgname).ins
 dtx := $(pkgname).dtx
 
+LATEX := pdflatex -interaction=nonstopmode
+
 all: $(pdf)
 
-$(sty): $(ins) $(dtx)  
-	tex $<
 
-$(pdf): $(dtx) $(sty)
-	pdflatex -interaction=nonstopmode $<
-	makeindex -s gind.ist -o $(pkgname).ind $(pkgname).idx 
-	makeindex -s gglo.ist -o jpmicro.gls jpmicro.glo
-	pdflatex -interaction=nonstopmode $<
+%.pdf: %.sty 
+	$(LATEX) $*.dtx
+	makeindex -s gind.ist -o $*.ind $*.idx
+	makeindex -s gglo.ist -o $*.gls $*.glo
+	$(LATEX) $*.dtx
+
+%.sty: %.ins %.dtx  
+	$(LATEX) $<
+
+

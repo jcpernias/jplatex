@@ -26,7 +26,7 @@
 %</package>
 %
 %<*driver>
-\documentclass[a4paper,10pt]{ltxdoc}
+\documentclass{ltxdoc}
 \usepackage[parfill]{parskip}
 \usepackage{fancyvrb}
 \usepackage[T1]{fontenc}
@@ -34,7 +34,6 @@
 \usepackage[osf,sc]{mathpazo}
 \renewcommand\sfdefault{lmss}
 \renewcommand\ttdefault{lmtt}
-\usepackage{geometry}
 \usepackage{jpmicro}[2016/03/01]
 \usepackage{microtype}
 \usepackage{hyperref}
@@ -190,10 +189,14 @@
 %
 % Define variants of variable names
 %    \begin{macrocode}
-\newcommand*{\jp@barred}[1]{\expandafter\newcommand\csname #1bar\endcsname{\widebar{#1}}}
-\newcommand*{\jp@starred}[1]{\expandafter\newcommand\csname #1star\endcsname{{#1}^*}}
-\newcommand*{\jp@primed}[1]{\expandafter\newcommand\csname #1prime\endcsname{{#1}'}}
-\newcommand*{\jp@dprimed}[1]{\expandafter\newcommand\csname #1dprime\endcsname{{#1}''}}
+\newcommand*{\jp@barred}[1]{%
+  \expandafter\newcommand\csname #1bar\endcsname{\widebar{#1}}}
+\newcommand*{\jp@starred}[1]{%
+  \expandafter\newcommand\csname #1star\endcsname{{#1}^*}}
+\newcommand*{\jp@primed}[1]{%
+  \expandafter\newcommand\csname #1prime\endcsname{{#1}'}}
+\newcommand*{\jp@dprimed}[1]{%
+  \expandafter\newcommand\csname #1dprime\endcsname{{#1}''}}
 \jp@barred{K}
 \jp@barred{P}
 \jp@barred{Q}
