@@ -1,1 +1,4 @@
 .Auto/
+*.log
+*.aux
+*.synctex.gz
