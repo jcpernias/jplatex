@@ -23,39 +23,66 @@
 \newcommand*{\ielast}[2]{\iratio{#1}{#2}\frac{#2}{#1}}
 
 
-\newcommand*{\jp@mkname}[2]{%
-  \expandafter\newcommand\csname #1\endcsname{\mname{#2}}}
 
-\DeclareDocumentCommand \jp@mkname {m g} {%
-  \IfValueTF{#2} {%
-    \expandafter\newcommand\csname #1\endcsname{\mname{#2}}
-  }{%
-    \expandafter\newcommand\csname #1\endcsname{\mname{#1}}
-  }
-}
+
+\RequirePackage{translator}
+
+\newcommand*{\jp@mkname}[3]{%
+  \deftranslation[to=Spanish]{#1}{#2}%
+  \deftranslation[to=English]{#1}{#3}%
+  \expandafter\newcommand\csname #1\endcsname{\mname{\translate{#1}}}}
+
+% \DeclareDocumentCommand \jp@mkname {m g} {%
+%   \IfValueTF{#2} {%
+%     \expandafter\newcommand\csname #1\endcsname{\mname{#2}}
+%   }{%
+%     \expandafter\newcommand\csname #1\endcsname{\mname{#1}}
+%   }
+% }
 
 % Revenues
-\jp@mkname{IT}{I}
-\jp@mkname{IMg}
-\jp@mkname{IMe}
+\jp@mkname{IT}{I}{R}
+\jp@mkname{IMg}{IMg}{MR}
+\jp@mkname{IMe}{IMe}{AR}
 
 % Expenditures
-\jp@mkname{GT}{G}
-\jp@mkname{GMg}
-\jp@mkname{GMe}
+\jp@mkname{GT}{G}{E}
+\jp@mkname{GMg}{GMg}{ME}
+\jp@mkname{GMe}{GMe}{AE}
 
 % Costs
-\jp@mkname{CT}{C}
-\jp@mkname{CMg}
-\jp@mkname{CMe}
-\jp@mkname{CV}
-\jp@mkname{CF}
-\jp@mkname{CVMe}
-\jp@mkname{CFMe}
+\jp@mkname{CT}{C}{C}
+\jp@mkname{CMg}{CMg}{MC} 
+\jp@mkname{CMe}{CMe}{AC}
+\jp@mkname{CV}{CV}{VC}
+\jp@mkname{CF}{CF}{FC}
+\jp@mkname{CVMe}{CVMe}{AVC}
+\jp@mkname{CFMe}{CFMe}{AFC}
 
 % Average and Marginal Product
-\jp@mkname{PMe}
-\jp@mkname{PMg}
+\jp@mkname{PMe}{PMe}{AP}
+\jp@mkname{PMg}{PMg}{MP}
 
 % Returns of the marginal product
-\jp@mkname{IPMg}
+\jp@mkname{IPMg}{IPMg}{MRP}
+
+
+% Define variants of variable names
+\newcommand*{\jp@barred}[1]{\expandafter\newcommand\csname #1bar\endcsname{\widebar{#1}}}
+\newcommand*{\jp@starred}[1]{\expandafter\newcommand\csname #1star\endcsname{{#1}^*}}
+\newcommand*{\jp@primed}[1]{\expandafter\newcommand\csname #1prime\endcsname{{#1}'}}
+\newcommand*{\jp@dprimed}[1]{\expandafter\newcommand\csname #1dprime\endcsname{{#1}''}}
+\jp@barred{K}
+\jp@barred{P}
+\jp@barred{Q}
+\jp@barred{C}
+\jp@starred{K}
+\jp@starred{P}
+\jp@starred{Q}
+\jp@primed{K}
+\jp@primed{P}
+\jp@primed{Q}
+\jp@dprimed{K}
+\jp@dprimed{P}
+\jp@dprimed{Q}
+
