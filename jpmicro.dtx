@@ -27,6 +27,7 @@
 %
 %<*driver>
 \documentclass[a4paper,10pt]{ltxdoc}
+\usepackage[parfill]{parskip}
 \usepackage{fancyvrb}
 \usepackage[T1]{fontenc}
 \usepackage[full]{textcomp}
@@ -72,7 +73,9 @@
 %
 % \GetFileInfo{jpmicro.dtx}
 %
-% \DoNotIndex{\newcommand,\newenvironment\frac\RequirePackage}
+% \DoNotIndex{\newcommand,\newenvironment,\frac,\RequirePackage}
+% \DoNotIndex{\csname,\endcsname,\expandafter}
+% \DoNotIndex{\translate,\deftranslation}
 % 
 %
 % \title{The \textsf{jpmicro} package\thanks{This document
@@ -106,6 +109,9 @@
 \RequirePackage{jpmath}
 %    \end{macrocode}
 %
+%
+%\subsection{Elasticities}
+%
 % \begin{macro}{\elast}
 % This is a dummy macro.  If it did anything, we'd describe its
 % implementation here.
@@ -131,6 +137,10 @@
 % \end{macro}
 %
 %
+%
+%\subsection{Multilingual macros}
+%
+%
 %    \begin{macrocode}
 \RequirePackage{translator}
 
@@ -139,7 +149,9 @@
   \deftranslation[to=English]{#1}{#3}%
   \expandafter\newcommand\csname #1\endcsname{\mname{\translate{#1}}}}
 %    \end{macrocode}
-% Revenues
+%
+% Revenues:
+%
 %    \begin{macrocode}
 \jp@mkname{IT}{I}{R}
 \jp@mkname{IMg}{IMg}{MR}
@@ -170,6 +182,11 @@
 % Returns of the marginal product
 \jp@mkname{IPMg}{IPMg}{MRP}
 %    \end{macrocode}
+%
+%
+%\subsection{Name decorations}
+%
+%
 % Define variants of variable names
 %    \begin{macrocode}
 \newcommand*{\jp@barred}[1]{\expandafter\newcommand\csname #1bar\endcsname{\widebar{#1}}}
