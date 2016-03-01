@@ -7,7 +7,7 @@ dtx := $(pkgname).dtx
 
 LATEX := pdflatex -interaction=nonstopmode
 
-all: $(pdf)
+all: jpmath.pdf jpmicro.pdf
 
 
 %.pdf: %.sty 
