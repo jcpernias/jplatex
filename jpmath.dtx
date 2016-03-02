@@ -146,6 +146,24 @@
 % \iffalse
 %</example>
 % \fi
+% \iffalse
+%<*example>
+% \fi
+
+\begin{exampleB}[lefthand width=3.5cm]{}
+\begin{tikzpicture}
+\path[fill=yellow!50!white] (0,0) circle (11mm);
+\path[fill=white] (0,0) circle (9mm);
+\foreach \w/\c in {90/blue,210/red,330/green}
+{\path[shading=ball,ball color=\c] (\w:1cm) circle (7mm);}
+\end{tikzpicture}
+\end{exampleB}
+
+% \iffalse
+%</example>
+% \fi
+%
+%
 % \StopEventually{\PrintChanges\PrintIndex}
 %
 % \section{Implementation}
