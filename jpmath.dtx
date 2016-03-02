@@ -34,19 +34,21 @@
 \usepackage[osf,sc]{mathpazo}
 \renewcommand\sfdefault{lmss}
 \renewcommand\ttdefault{lmtt}
-%\usepackage[scaled]{luximono}
+\usepackage[scaled]{luximono}
+\usepackage{inconsolata}
 \usepackage{jpmath}[2016/03/01]
 \usepackage{microtype}
 
 \usepackage[skins,listings]{tcolorbox}
-\newtcblisting{exampleB}[2][]{%
+\newtcblisting{exampleB}[1][]{%
+  notitle,
   colframe=red!50!yellow!50!black,
   colback=white,
-  coltitle=red!50!yellow!3!white,
+  % coltitle=red!50!yellow!3!white,
   bicolor,colbacklower=red!50!yellow!5!white,
-  fonttitle=\sffamily\bfseries,
-  sidebyside,text and listing,
-  title=#2,#1}
+  fontupper=\tiny,
+  sidebyside,listing and text,
+  #1}
 
 \usepackage{url}
 \usepackage{hyperref}
@@ -126,39 +128,26 @@
 % |cs[widebar]|marg[text]
 % \end{Verbatim}
 % For example \cs{widebar\{\cs{beta}\cs{omega}\}} produces:
-% \begin{equation*}
-%   \widebar{\beta \omega}
-% \end{equation*}
+% \iffalse
+%<*example>
+% \fi
+\begin{exampleB}[righthand width=2cm, fontupper=\LARGE]
+  \[ \widebar{A} \quad \widebar{PW}  \]
+  \[ \overline{A} \quad \overline{PW} \]
+  \[ \bar{A} \quad \bar{PW}  \]
+\end{exampleB}
+% \iffalse
+%</example>
+% \fi
 % 
 % \iffalse
 %<*example>
 % \fi
-
-\begin{exampleB}[lefthand width=3.5cm]{}
-\begin{tikzpicture}
-\path[fill=yellow!50!white] (0,0) circle (11mm);
-\path[fill=white] (0,0) circle (9mm);
-\foreach \w/\c in {90/red,210/green,330/blue}
-{\path[shading=ball,ball color=\c] (\w:1cm) circle (7mm);}
-\end{tikzpicture}
+\begin{exampleB}[righthand width=2cm]
+  \[ \widebar{\beta \omega} \]
+  \[ \overline{\beta \omega} \]
+  \[ \bar{\beta \omega} \]
 \end{exampleB}
-
-% \iffalse
-%</example>
-% \fi
-% \iffalse
-%<*example>
-% \fi
-
-\begin{exampleB}[lefthand width=3.5cm]{}
-\begin{tikzpicture}
-\path[fill=yellow!50!white] (0,0) circle (11mm);
-\path[fill=white] (0,0) circle (9mm);
-\foreach \w/\c in {90/blue,210/red,330/green}
-{\path[shading=ball,ball color=\c] (\w:1cm) circle (7mm);}
-\end{tikzpicture}
-\end{exampleB}
-
 % \iffalse
 %</example>
 % \fi
