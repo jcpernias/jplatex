@@ -34,8 +34,20 @@
 \usepackage[osf,sc]{mathpazo}
 \renewcommand\sfdefault{lmss}
 \renewcommand\ttdefault{lmtt}
+%\usepackage[scaled]{luximono}
 \usepackage{jpmath}[2016/03/01]
 \usepackage{microtype}
+
+\usepackage[skins,listings]{tcolorbox}
+\newtcblisting{exampleB}[2][]{%
+  colframe=red!50!yellow!50!black,
+  colback=white,
+  coltitle=red!50!yellow!3!white,
+  bicolor,colbacklower=red!50!yellow!5!white,
+  fonttitle=\sffamily\bfseries,
+  sidebyside,text and listing,
+  title=#2,#1}
+
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{bookmark}
@@ -108,6 +120,32 @@
 % describing what the macro is supposed to do, what its mandatory and
 % optional arguments are, and so forth.
 %
+% \DescribeMacro{\widebar}
+% A replacement for \cs{bar}:
+% \begin{Verbatim}[frame=single,commandchars=\|\[\],gobble=2,fontfamily=tt]
+% |cs[widebar]|marg[text]
+% \end{Verbatim}
+% For example \cs{widebar\{\cs{beta}\cs{omega}\}} produces:
+% \begin{equation*}
+%   \widebar{\beta \omega}
+% \end{equation*}
+% 
+% \iffalse
+%<*example>
+% \fi
+
+\begin{exampleB}[lefthand width=3.5cm]{}
+\begin{tikzpicture}
+\path[fill=yellow!50!white] (0,0) circle (11mm);
+\path[fill=white] (0,0) circle (9mm);
+\foreach \w/\c in {90/red,210/green,330/blue}
+{\path[shading=ball,ball color=\c] (\w:1cm) circle (7mm);}
+\end{tikzpicture}
+\end{exampleB}
+
+% \iffalse
+%</example>
+% \fi
 % \StopEventually{\PrintChanges\PrintIndex}
 %
 % \section{Implementation}
@@ -171,7 +209,7 @@
 % \end{macro}
 
 
-% \begin{macro}{\mname}
+% \begin{macro}{\widebar}
 % Replacement for bar: from a post by Hendrik Vogt:
 % \url{http://tex.stackexchange.com/a/60253}
 %    \begin{macrocode}
