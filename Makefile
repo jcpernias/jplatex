@@ -1,25 +1,47 @@
-pkgname := jpmicro
+pkgnames := jpmicro jpmath
+docnames := test
 
-sty := $(pkgname).sty
-pdf := $(pkgname).pdf
-ins := $(pkgname).ins
-dtx := $(pkgname).dtx
+rootdir := .
+builddir := $(rootdir)/build
 
-LATEX := pdflatex -interaction=nonstopmode
+MKDIR := mkdir -p
+LATEX := pdflatex -interaction=nonstopmode -output-directory $(builddir)
+RM := rm -f
 
-all: test.pdf jpmath.pdf jpmicro.pdf 
+pkgs := $(addsuffix .sty, $(pkgnames))
+pdfs := $(addsuffix .pdf, $(pkgnames) $(docnames))
 
-test.pdf: test.tex jpmath.sty jpmicro.sty
+all: $(pdfs)
+
+%.pdf: %.tex $(pkgs) | dirs
 	$(LATEX) $<
+	mv -f $(builddir)/$@ $(rootdir)
 
 
-%.pdf: %.sty 
+%.pdf: %.sty | dirs
 	$(LATEX) $*.dtx
-	makeindex -s gind.ist -o $*.ind $*.idx
-	makeindex -s gglo.ist -o $*.gls $*.glo
+	makeindex -s gind.ist -o $(builddir)/$*.ind $(builddir)/$*.idx
+	makeindex -s gglo.ist -o $(builddir)/$*.gls $(builddir)/$*.glo
 	$(LATEX) $*.dtx
+	mv -f $(builddir)/$@ $(rootdir)
 
-%.sty: %.ins %.dtx  
+%.sty: %.ins %.dtx | dirs 
 	$(LATEX) $<
+	mv -f $(builddir)/$@ $(rootdir)
+
+jpmicro.pdf: jpmath.sty
+
+.PRECIOUS: %.sty
+
+.PHONY:
+dirs:
+	$(MKDIR) $(builddir)
 
 
+.PHONY:
+clean:
+	$(RM) -r $(builddir)
+
+.PHONY:
+veryclean: clean
+	$(RM) $(pdfs) $(pkgs) 
