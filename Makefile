@@ -1,47 +1,69 @@
-pkgnames := jpdoc jpmicro jpmath
-docnames := test
+pkgname := jp
+
+stynames := jpdoc jpmath jpmicro
 
 rootdir := .
 builddir := $(rootdir)/build
+tdsrootdir := $(rootdir)/texmf
+pkgdir := $(tdsrootdir)/tex/latex/$(pkgname)
+sourcedir := $(tdsrootdir)/source/latex/$(pkgname)
+docdir := $(tdsrootdir)/doc/latex/$(pkgname)
 
 MKDIR := mkdir -p
-LATEX := pdflatex -interaction=nonstopmode -output-directory $(builddir)
+LATEXBATCH := pdflatex -interaction=nonstopmode
+texinputs := TEXINPUTS=$(pkgdir):
+LATEX := $(texinputs) $(LATEXBATCH) -output-directory $(builddir)
+LATEXINS := $(LATEXBATCH) -output-directory $(builddir)
 RM := rm -f
 
-pkgs := $(addsuffix .sty, $(pkgnames))
-pdfs := $(addsuffix .pdf, $(pkgnames) $(docnames))
+pkgs := $(addprefix $(pkgdir)/, $(addsuffix .sty, $(stynames)))
+docs := $(addprefix $(docdir)/, $(addsuffix .pdf, $(stynames)))
 
-all: $(pdfs)
+all: $(docs) test.pdf
 
-%.pdf: %.tex $(pkgs) | dirs
+%.pdf: %.tex $(pkgs) 
 	$(LATEX) $<
-	mv -f $(builddir)/$@ $(rootdir)
+	mv -f $(builddir)/$(@F) $(rootdir)
 
-
-%.pdf: %.sty jpdoc.sty | dirs
+$(docdir)/%.pdf: $(pkgdir)/%.sty $(pkgdir)/jpdoc.sty 
 	$(LATEX) $*.dtx
 	makeindex -s gind.ist -o $(builddir)/$*.ind $(builddir)/$*.idx
 	makeindex -s gglo.ist -o $(builddir)/$*.gls $(builddir)/$*.glo
 	$(LATEX) $*.dtx
-	mv -f $(builddir)/$@ $(rootdir)
+	mv -f $(builddir)/$(@F) $(docdir)
 
-%.sty: %.ins %.dtx | dirs 
-	$(LATEX) $<
-	mv -f $(builddir)/$@ $(rootdir)
+$(pkgdir)/%.sty: %.ins %.dtx | dirs 
+	$(LATEXINS) $<
+	cp -a -f $^ $(sourcedir)
+	mv -f $(builddir)/$(@F) $(pkgdir)
 
-jpmicro.pdf: jpmath.sty
+$(docdir)/jpmicro.pdf: $(pkgdir)/jpmath.sty
 
-.PRECIOUS: %.sty
+.PRECIOUS: $(pkgdir)/%.sty
+
+zip: $(pkgname).tds.zip
+
+$(pkgname).tds.zip: $(docs)
+	$(RM) $@
+	cd $(tdsrootdir) && find  -type f | zip -q -@  ../$@
+
+.PHONY:
+install: zip
+	unzip -q -o $(pkgname).tds.zip -d ${TEXMFHOME} 
+	texhash ${TEXMFHOME}
 
 .PHONY:
 dirs:
 	$(MKDIR) $(builddir)
+	$(MKDIR) $(pkgdir)
+	$(MKDIR) $(sourcedir)
+	$(MKDIR) $(docdir)
 
 
 .PHONY:
 clean:
-	$(RM) -r $(builddir)
+	$(RM) -r $(builddir) 
 
 .PHONY:
 veryclean: clean
-	$(RM) $(pdfs) $(pkgs) 
+	$(RM) -r $(tdsrootdir) test.pdf
