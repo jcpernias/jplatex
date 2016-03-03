@@ -1,4 +1,4 @@
-pkgnames := jpmicro jpmath
+pkgnames := jpdoc jpmicro jpmath
 docnames := test
 
 rootdir := .
@@ -18,7 +18,7 @@ all: $(pdfs)
 	mv -f $(builddir)/$@ $(rootdir)
 
 
-%.pdf: %.sty | dirs
+%.pdf: %.sty jpdoc.sty | dirs
 	$(LATEX) $*.dtx
 	makeindex -s gind.ist -o $(builddir)/$*.ind $(builddir)/$*.idx
 	makeindex -s gglo.ist -o $(builddir)/$*.gls $(builddir)/$*.glo

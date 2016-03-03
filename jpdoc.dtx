@@ -1,0 +1,243 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2016 by Jose C. Pernias <jcpernias@gmail.com>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{jpdoc.dtx}
+%</driver>
+%<package>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<package>\ProvidesPackage{jpdoc}
+%<*package>
+    [2016/03/01 v1.0 Macros for math]
+%</package>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{jpdoc}[2016/03/01]
+\EnableCrossrefs         
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{jpdoc.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{29}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2016/03/01}{Initial version}
+%
+% \GetFileInfo{jpdoc.dtx}
+%
+% \DoNotIndex{\newcommand,\newenvironment,\RequirePackage}
+% \DoNotIndex{\begin,\end,\string,\providecommand}
+% \DoNotIndex{\AddLineBeginAux, \AtEndPreamble,\ttfamily}
+% \DoNotIndex{\BKM@Entry, \newtcblisting,\VerbatimEnvironment}
+% \expandafter\DoNotIndex\expandafter{\string\|}
+% \expandafter\DoNotIndex\expandafter{\string\[}
+% \expandafter\DoNotIndex\expandafter{\string\]}
+% 
+%
+% \title{The \textsf{jpdoc} package\thanks{This document
+%   corresponds to \textsf{jpdoc}~\fileversion, dated \filedate.}}
+% \author{Jos\'e C. Pern\'{\i}as \\ \texttt{jcpernias@gmail.com}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% Put text here.
+%
+% \section{Usage}
+%
+% Put text here.
+% 
+% \DescribeEnv{source}
+% This macro does nothing.\index{naming|usage} It is merely an
+% example.  If this were a real macro, you would put a paragraph here
+% describing what the macro is supposed to do, what its mandatory and
+% optional arguments are, and so forth.
+% \iffalse
+%<*example>
+% \fi
+\begin{source}
+  |cs[begin]|marg[source]
+    |dots
+  |cs[end]|marg[source]
+\end{source}
+% \iffalse
+%</example>
+% \fi
+%
+% \DescribeEnv{example}
+% This macro does nothing.\index{naming|usage} It is merely an
+% example.  If this were a real macro, you would put a paragraph here
+% describing what the macro is supposed to do, what its mandatory and
+% optional arguments are, and so forth.
+% \iffalse
+%<*example>
+% \fi
+\begin{source}
+  |cs[begin]|marg[example]
+    |dots
+  |cs[end]|marg[example]
+\end{source}
+% \iffalse
+%</example>
+% \fi
+% \iffalse
+%<*example>
+% \fi
+\begin{source}
+  |cs[begin]|marg[example]
+    This is \LaTeX.
+  |cs[end]|marg[example]
+\end{source}
+% \iffalse
+%</example>
+% \fi
+% \iffalse
+%<*example>
+% \fi
+\begin{example}
+  This is \LaTeX.
+\end{example}
+% \iffalse
+%</example>
+% \fi
+%
+%
+%
+% \StopEventually{\PrintChanges\PrintIndex}
+%
+% \section{Implementation}
+%
+%
+%
+% \subsection{Fonts}
+%
+% Set font enconding to \texttt{T1}:
+%  
+%    \begin{macrocode}
+\RequirePackage[T1]{fontenc}
+%    \end{macrocode}
+% Load the Text Companion fonts:
+%    \begin{macrocode}
+\RequirePackage[full]{textcomp}
+%    \end{macrocode}
+% Use Libertine fonts for serif and sans serif families:
+%    \begin{macrocode}
+\RequirePackage{libertine}
+%    \end{macrocode}
+% Use Bera Mono for typewriter family:
+%    \begin{macrocode}
+\RequirePackage[scaled=0.78]{beramono}
+%    \end{macrocode}
+% Enable micro-typographic extensions of \texttt{pdflatex}:
+%    \begin{macrocode}
+\RequirePackage{microtype}
+%    \end{macrocode}
+%
+%
+%
+% \subsection{General formatting}
+%
+%
+% Do not indent paragraphs. Use space between paragraphs instead:
+%    \begin{macrocode}
+\RequirePackage[parfill]{parskip}
+%    \end{macrocode}
+% Load the \texttt{hyperref} and \texttt{bookmark} packages at the end
+% of the preamble:
+%    \begin{macrocode}
+\RequirePackage{etoolbox}
+\AtEndPreamble{%
+  \RequirePackage{hyperref}%
+  \RequirePackage{bookmark}%
+}
+\RequirePackage{auxhook}
+\AddLineBeginAux{%
+  \string\providecommand{\string\BKM@Entry}[1]{}%
+}
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Source and example environments}
+%
+%
+% Load the \texttt{tcolorbox} and \texttt{listings} packages:
+%    \begin{macrocode}
+\RequirePackage[skins, listings]{tcolorbox}
+%    \end{macrocode}
+% \begin{environment}{example}
+% Definition of the \texttt{example} environment:
+%    \begin{macrocode}
+\newtcblisting{example}{%
+  notitle, size=fbox, bicolor,%
+  colbacklower=white!89!black, righthand width=3cm,%
+  sidebyside, listing and text,%
+  listing options={basicstyle=\ttfamily,%
+    columns=fullflexible,%
+    basewidth = {.5em,0.4em},%
+    breaklines=true,%
+    tabsize=2%
+  }
+}
+%    \end{macrocode}
+% \end{environment}
+% Load the \texttt{fancyvrb} package:
+%    \begin{macrocode}
+\RequirePackage{fancyvrb}
+%    \end{macrocode}
+
+% \begin{environment}{source}
+% Definition of the \texttt{source} environment
+%    \begin{macrocode}
+\newenvironment{source}{%
+  \VerbatimEnvironment%
+  \begin{tcolorbox}[notitle,size=fbox]%
+    \begin{Verbatim}[commandchars=\|\[\],%
+      fontfamily=tt]}{\end{Verbatim}\end{tcolorbox}}
+%    \end{macrocode}
+% \end{environment}
+%
+% \Finale
+% \endinput
+
+
+% Local Variables:
+% mode: doctex
+% TeX-master: nil
+% End:

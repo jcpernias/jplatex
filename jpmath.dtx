@@ -27,69 +27,18 @@
 %
 %<*driver>
 \documentclass{ltxdoc}
-\usepackage[parfill]{parskip}
-\usepackage{fancyvrb}
-\usepackage[T1]{fontenc}
-\usepackage[full]{textcomp}
-\usepackage{libertine}
-\usepackage[scaled=0.91]{zi4}
-
+\usepackage{jpdoc}
 \usepackage{jpmath}[2016/03/01]
-\usepackage{microtype}
-
-\usepackage[skins, listings]{tcolorbox}
-\lstdefinestyle{mystyle}{language=[LaTeX]TeX,
-  basicstyle=\ttfamily,
-  columns=fullflexible, 
-  basewidth = {.5em,0.4em},
-  %texcsstyle=*\color{blue},
-  breaklines=true,
-  %keywordstyle=\color{green!30!black},
-  %commentstyle=\color{red},
-  morekeywords={},
-  %otherkeywords={$,\{,\},[,],&},
-  %backgroundcolor=\color{gray!30},
-  escapeinside=<>,
-  %moretexcs={maketitle},
-  %showtabs=true,
-  %showspaces=true,
-  tabsize=2,
-  gobble=2
-}
-
-\newenvironment{BGVerbatim}
- {\VerbatimEnvironment
-  \begin{tcolorbox}[
-    notitle,
-    size=fbox,
-  ]%
-  \begin{Verbatim}[commandchars=\|\[\],gobble=2,fontfamily=tt]}
- {\end{Verbatim}\end{tcolorbox}}
-
-\newtcblisting{exampleB}[1][]{%
-  notitle,
-  listing style=mystyle,
-  size=fbox,
-  bicolor, colbacklower=white!89!black,
-  righthand width=3cm,
-  sidebyside,listing and text,
-  #1}
-
-\usepackage{url}
-\usepackage{hyperref}
-\usepackage{bookmark}
 \EnableCrossrefs         
 \CodelineIndex
 \RecordChanges
 \begin{document}
   \DocInput{jpmath.dtx}
-  \PrintChanges
-  \PrintIndex
 \end{document}
 %</driver>
 % \fi
 %
-% \CheckSum{0}
+% \CheckSum{273}
 %
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
@@ -119,12 +68,20 @@
 % \DoNotIndex{\mathtoolset,\DeclarePairedDelimiter}
 % \DoNotIndex{\overline,\quad,\mathop,\mathrm,\lvert,\rvert,\mathaccent,\mathaccentV}
 % \DoNotIndex{\mathsurround,\mathgroup}
-% \DoNotIndex{\macc@depth}
+% \DoNotIndex{\macc@depth,\macc@group,\macc@kerna,\macc@nested@a,\macc@nucleus}
+% \DoNotIndex{\macc@set@skewchar,\macc@style,\math@bgroup,\math@egroup}
+% \DoNotIndex{\save@mathaccent,\mathtoolsset}
 % \DoNotIndex{\endmarker}
 % \DoNotIndex{\text,\textit,\textnormal,\scriptspace}
 % \DoNotIndex{\hbox,\setbox,\savebox,\dimen@,\dimexpr,\divide,\kern,\rel@kern}
 % \DoNotIndex{\translate,\deftranslation}
-% \DoNotIndex{\,,\!,\%}
+% \expandafter\DoNotIndex\expandafter{\string\,}
+% \expandafter\DoNotIndex\expandafter{\string\!}
+% \expandafter\DoNotIndex\expandafter{\string\%}
+% \DoNotIndex{\@empty,\@ifnextchar,\@ne,\@tempdima,\z@,\tw@}
+% \DoNotIndex{\final@kern,\first@char,\frozen@everymath,\gobble@till@marker}
+% \DoNotIndex{\if@single}
+% \DoNotIndex{\wide@bar,\wide@bar@,\jpmath@abs,\jpmath@eval}
 % 
 %
 % \title{The \textsf{jpmath} package\thanks{This document
@@ -152,9 +109,9 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{BGVerbatim}
+\begin{source}
   |cs[widebar]|marg[text]
-\end{BGVerbatim}
+\end{source}
 % \iffalse
 %</example>
 % \fi
@@ -162,7 +119,7 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{exampleB}[]
+\begin{example}
   \[
     \begin{array}{ll}
       \widebar{A} & \widebar{PW}  \\
@@ -170,7 +127,7 @@
       \bar{A} & \bar{PW}
     \end{array}
   \]
-\end{exampleB}
+\end{example}
 % \iffalse
 %</example>
 % \fi
@@ -178,7 +135,7 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{exampleB}[]
+\begin{example}
   \[
     \begin{array}{l}
       \widebar{\beta \omega} \\
@@ -186,7 +143,7 @@
       \bar{\beta \omega}
     \end{array}
   \]
-\end{exampleB}
+\end{example}
 % \iffalse
 %</example>
 % \fi

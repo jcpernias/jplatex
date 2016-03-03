@@ -94,7 +94,7 @@ bindingoffset=0in, hcentering=true]{geometry}
     No \protect\subject\space given}{%
     Oh dear! Something's gone wrong.\MessageBreak
     \space \space Try typing \space <return>
-    \space to proceed, ignoring \protect\foo.
+    \space to proceed, ignoring \protect\subject.
   }
 }
 

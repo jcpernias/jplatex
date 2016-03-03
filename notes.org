@@ -47,8 +47,8 @@
   name, test date, and number of questions. What about code that fill
   the number of questions automatically.
 
-* Things to do [0/0]
-- [ ] Makefile
+* Things to do [1/4]
+- [X] Makefile
 - [ ] Test cases
 - [ ] Populate jpmicro
 - [ ] Add hooks allowing a user designing a cover sheet, the header
