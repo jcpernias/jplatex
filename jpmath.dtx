@@ -31,22 +31,21 @@
 \usepackage{fancyvrb}
 \usepackage[T1]{fontenc}
 \usepackage[full]{textcomp}
-\usepackage[osf,sc]{mathpazo}
-\renewcommand\sfdefault{lmss}
-\renewcommand\ttdefault{lmtt}
-\usepackage[scaled]{luximono}
-\usepackage{inconsolata}
+\usepackage{libertine}
+\usepackage[scaled=0.91]{zi4}
+
 \usepackage{jpmath}[2016/03/01]
 \usepackage{microtype}
 
-\usepackage[skins,listings]{tcolorbox}
+\usepackage[skins, listings]{tcolorbox}
 \newtcblisting{exampleB}[1][]{%
   notitle,
+  listing options={columns=fullflexible, basewidth = {.5em,0.4em},
+    basicstyle=\ttfamily},
   colframe=red!50!yellow!50!black,
   colback=white,
-  % coltitle=red!50!yellow!3!white,
   bicolor,colbacklower=red!50!yellow!5!white,
-  fontupper=\tiny,
+  righthand width=2.5cm,
   sidebyside,listing and text,
   #1}
 
@@ -131,7 +130,7 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{exampleB}[righthand width=2cm, fontupper=\LARGE]
+\begin{exampleB}[righthand width=2cm]
   \[ \widebar{A} \quad \widebar{PW}  \]
   \[ \overline{A} \quad \overline{PW} \]
   \[ \bar{A} \quad \bar{PW}  \]
@@ -143,7 +142,7 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{exampleB}[righthand width=2cm]
+\begin{exampleB}[]
   \[ \widebar{\beta \omega} \]
   \[ \overline{\beta \omega} \]
   \[ \bar{\beta \omega} \]
