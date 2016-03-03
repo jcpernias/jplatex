@@ -38,10 +38,37 @@
 \usepackage{microtype}
 
 \usepackage[skins, listings]{tcolorbox}
+\lstdefinestyle{mystyle}{language=[LaTeX]TeX,
+  basicstyle=\ttfamily,
+  columns=fullflexible, 
+  basewidth = {.5em,0.4em},
+  %texcsstyle=*\color{blue},
+  breaklines=true,
+  %keywordstyle=\color{green!30!black},
+  %commentstyle=\color{red},
+  morekeywords={},
+  %otherkeywords={$,\{,\},[,],&},
+  %backgroundcolor=\color{gray!30},
+  escapeinside=<>,
+  %moretexcs={maketitle},
+  %showtabs=true,
+  %showspaces=true,
+  tabsize=2,
+  gobble=2
+}
+
+\newenvironment{BGVerbatim}
+ {\VerbatimEnvironment
+  \begin{tcolorbox}[
+    notitle,
+    size=fbox,
+  ]%
+  \begin{Verbatim}[commandchars=\|\[\],gobble=2,fontfamily=tt]}
+ {\end{Verbatim}\end{tcolorbox}}
+
 \newtcblisting{exampleB}[1][]{%
   notitle,
-  listing options={columns=fullflexible, basewidth = {.5em,0.4em},
-    basicstyle=\ttfamily},
+  listing style=mystyle,
   size=fbox,
   bicolor, colbacklower=white!89!black,
   righthand width=3cm,
@@ -122,9 +149,15 @@
 %
 % \DescribeMacro{\widebar}
 % A replacement for \cs{bar}:
-% \begin{Verbatim}[frame=single,commandchars=\|\[\],gobble=2,fontfamily=tt]
-% |cs[widebar]|marg[text]
-% \end{Verbatim}
+% \iffalse
+%<*example>
+% \fi
+\begin{BGVerbatim}
+  |cs[widebar]|marg[text]
+\end{BGVerbatim}
+% \iffalse
+%</example>
+% \fi
 % For example \cs{widebar\{\cs{beta}\cs{omega}\}} produces:
 % \iffalse
 %<*example>
