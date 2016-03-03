@@ -42,10 +42,9 @@
   notitle,
   listing options={columns=fullflexible, basewidth = {.5em,0.4em},
     basicstyle=\ttfamily},
-  colframe=red!50!yellow!50!black,
-  colback=white,
-  bicolor,colbacklower=red!50!yellow!5!white,
-  righthand width=2.5cm,
+  size=fbox,
+  bicolor, colbacklower=white!89!black,
+  righthand width=3cm,
   sidebyside,listing and text,
   #1}
 
@@ -130,10 +129,14 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{exampleB}[righthand width=2cm]
-  \[ \widebar{A} \quad \widebar{PW}  \]
-  \[ \overline{A} \quad \overline{PW} \]
-  \[ \bar{A} \quad \bar{PW}  \]
+\begin{exampleB}[]
+  \[
+    \begin{array}{ll}
+      \widebar{A} & \widebar{PW}  \\
+      \overline{A} & \overline{PW} \\
+      \bar{A} & \bar{PW}
+    \end{array}
+  \]
 \end{exampleB}
 % \iffalse
 %</example>
@@ -143,9 +146,13 @@
 %<*example>
 % \fi
 \begin{exampleB}[]
-  \[ \widebar{\beta \omega} \]
-  \[ \overline{\beta \omega} \]
-  \[ \bar{\beta \omega} \]
+  \[
+    \begin{array}{l}
+      \widebar{\beta \omega} \\
+      \overline{\beta \omega} \\
+      \bar{\beta \omega}
+    \end{array}
+  \]
 \end{exampleB}
 % \iffalse
 %</example>
