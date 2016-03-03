@@ -1,6 +1,7 @@
 pkgname := jp
 
 stynames := jpdoc jpmath jpmicro
+cfg := ltxdoc.cfg hyperref.cfg
 
 rootdir := .
 builddir := $(rootdir)/build
@@ -25,7 +26,7 @@ all: $(docs) test.pdf
 	$(LATEX) $<
 	mv -f $(builddir)/$(@F) $(rootdir)
 
-$(docdir)/%.pdf: $(pkgdir)/%.sty $(pkgdir)/jpdoc.sty 
+$(docdir)/%.pdf: $(pkgdir)/%.sty $(pkgdir)/jpdoc.sty $(cfg)
 	$(LATEX) $*.dtx
 	makeindex -s gind.ist -o $(builddir)/$*.ind $(builddir)/$*.idx
 	makeindex -s gglo.ist -o $(builddir)/$*.gls $(builddir)/$*.glo
