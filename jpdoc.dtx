@@ -71,7 +71,8 @@
 %
 % \title{The \textsf{jpdoc} package\thanks{This document
 %   corresponds to \textsf{jpdoc}~\fileversion, dated \filedate.}}
-% \author{Jos\'e C. Pern\'{\i}as \\ \texttt{jcpernias@gmail.com}}
+% \author{Jos\'e C. Pern\'{\i}as \\%
+%   \href{mailto:jcpernias@gmail.com}{jcpernias@gmail.com}}
 %
 % \maketitle
 %
@@ -147,7 +148,7 @@
 %
 % \subsection{Fonts}
 %
-% Set font enconding to \texttt{T1}:
+% Set font enconding to |T1|:
 %  
 %    \begin{macrocode}
 \RequirePackage[T1]{fontenc}
@@ -164,7 +165,7 @@
 %    \begin{macrocode}
 \RequirePackage[scaled=0.78]{beramono}
 %    \end{macrocode}
-% Enable micro-typographic extensions of \texttt{pdflatex}:
+% Enable micro-typographic extensions of |pdflatex|:
 %    \begin{macrocode}
 \RequirePackage{microtype}
 %    \end{macrocode}
@@ -178,7 +179,7 @@
 %    \begin{macrocode}
 \RequirePackage[parfill]{parskip}
 %    \end{macrocode}
-% Load the \texttt{hyperref} and \texttt{bookmark} packages at the end
+% Load the |hyperref| and |bookmark| packages at the end
 % of the preamble:
 %    \begin{macrocode}
 \RequirePackage{etoolbox}
@@ -197,12 +198,12 @@
 % \subsection{Source and example environments}
 %
 %
-% Load the \texttt{tcolorbox} and \texttt{listings} packages:
+% Load the |tcolorbox| and |listings| packages:
 %    \begin{macrocode}
 \RequirePackage[skins, listings]{tcolorbox}
 %    \end{macrocode}
 % \begin{environment}{example}
-% Definition of the \texttt{example} environment:
+% Definition of the |example| environment:
 %    \begin{macrocode}
 \newtcblisting{example}{%
   notitle, size=fbox, bicolor,%
@@ -217,13 +218,13 @@
 }
 %    \end{macrocode}
 % \end{environment}
-% Load the \texttt{fancyvrb} package:
+% Load the |fancyvrb| package:
 %    \begin{macrocode}
 \RequirePackage{fancyvrb}
 %    \end{macrocode}
 
 % \begin{environment}{source}
-% Definition of the \texttt{source} environment
+% Definition of the |source| environment
 %    \begin{macrocode}
 \newenvironment{source}{%
   \VerbatimEnvironment%
