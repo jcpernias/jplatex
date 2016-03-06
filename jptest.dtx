@@ -1,0 +1,290 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2016 by Jose C. Pernias <jcpernias@gmail.com>
+% -------------------------------------------------------
+% 
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in:
+%
+%    http://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX 
+% version 2005/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<*driver>
+\ProvidesFile{jptest.dtx}
+%</driver>
+%<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
+%<class>\ProvidesClass{jptest}
+%<*class>
+    [2016/03/01 v1.0 Class for multiple choice tests]
+%</class>
+%
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{jpdoc}
+\EnableCrossrefs         
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{jptest.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%
+% \changes{v1.0}{2016/03/01}{Initial version}
+%
+% \GetFileInfo{jptest.dtx}
+%
+% \DoNotIndex{\newcommand,\newenvironment,\RequirePackage}
+% \DoNotIndex{\begin,\end,\string,\providecommand}
+% \DoNotIndex{\AddLineBeginAux, \AtEndPreamble,\ttfamily}
+% \DoNotIndex{\BKM@Entry, \newtcblisting,\VerbatimEnvironment}
+% \expandafter\DoNotIndex\expandafter{\string\|}
+% \expandafter\DoNotIndex\expandafter{\string\[}
+% \expandafter\DoNotIndex\expandafter{\string\]}
+% 
+%
+% \title{The \textsf{jptest} class\thanks{This document
+%   corresponds to \textsf{jptest}~\fileversion, dated \filedate.}}
+% \author{Jos\'e C. Pern\'{\i}as \\%
+%   \href{mailto:jcpernias@gmail.com}{jcpernias@gmail.com}}
+%
+% \maketitle
+%
+% \section{Introduction}
+%
+% The |jptest| class allows typesetting simple multiple choice tests. 
+%
+% \section{Usage}
+%
+% Put text here.
+% 
+%
+% \StopEventually{\PrintChanges\PrintIndex}
+%
+% \section{Implementation}
+%
+%
+%
+%
+%    \begin{macrocode}
+\DeclareOption*{%
+  \PassOptionsToClass{\CurrentOption}{article}%
+}
+\ProcessOptions\relax
+\LoadClass{article}
+
+% Babel: handle the problematic options of spanish
+\def\spanishoptions{es-noindentfirst,es-noitemize}
+\RequirePackage[spanish]{babel}
+\addto\shorthandsspanish{\spanishdeactivate{"<>}}
+
+% Fonts
+% ------------------------------------------------------------
+% Main font: kp 
+% Sans serif: Classico
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage[full]{textcomp}
+
+% \usepackage[sb]{libertine}
+\RequirePackage[oldstylenums]{kpfonts}   
+\RequirePackage[oldstyle, tabular]{biolinum}
+%\RequirePackage{classico}           
+
+
+% \usepackage[sb]{libertine}
+% \usepackage[varqu,varl]{zi4}% inconsolata
+% \usepackage[libertine,bigdelims,vvarbb]{newtxmath} % bb from STIX
+% \usepackage[cal=boondoxo]{mathalfa} % mathcal
+% \useosf % osf for text, not math
+
+\RequirePackage{xcolor}         
+
+
+\RequirePackage[twoside, hscale=0.72, vscale=0.75, 
+bindingoffset=0in, hcentering=true]{geometry}          
+
+% Activate microtypography
+\RequirePackage{microtype}         
+
+% Format dates
+\RequirePackage[useregional=num]{datetime2}
+\RequirePackage{tikzpagenodes}
+\RequirePackage{fancyhdr}
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+\lhead{\textsc{\@subject}}
+\chead{\textsc{\@testname}}
+\rhead{\@testdate}
+
+\fancypagestyle{first}{ %
+  \fancyhf{} % remove everything
+  \lhead{ \begin{tikzpicture}[remember picture, overlay]
+  \fill [black!10!white] (current page header area.north west) rectangle (current     page header area.south east);
+ \end{tikzpicture}\color{black!60!white}\textsc{\,\@subject}}
+  \chead{\color{black!60!white}\textsc{\@testname}}
+  \rhead{\color{black!60!white}\@testdate\,}
+  \renewcommand{\headrulewidth}{0.0pt}
+}
+\newcommand*{\ClearDoublePage}{\clearpage{\pagestyle{empty}\cleardoublepage}}
+
+% Lists
+% ------------------------------------------------------------
+\RequirePackage{enumitem}
+\setlist{leftmargin=*}
+\setlist[enumerate, 2]{beginpenalty=10000, midpenalty=10000}
+
+
+% Math
+% ------------------------------------------------------------
+\RequirePackage{jpmath}
+
+
+% Tools for writing macros
+% ------------------------------------------------------------
+\RequirePackage{ifthen}
+\RequirePackage{forloop}
+\RequirePackage{etoolbox}
+\RequirePackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+% More declarations
+% ============================================================
+
+\newcommand*{\subject}[1]{\renewcommand\@subject{#1}}
+\newcommand*{\@subject}{\PackageError{jptest}{%
+    No \protect\subject\space given}{%
+    Oh dear! Something's gone wrong.\MessageBreak
+    \space \space Try typing \space <return>
+    \space to proceed, ignoring \protect\subject.
+  }
+}
+
+\newcommand*{\testdate}[1]{\renewcommand\@testdate{\DTMdate{#1}}}
+\newcommand*{\@testdate}{\today}
+
+\newcommand*{\testname}[1]{\renewcommand\@testname{#1}}
+\newcommand*{\@testname}{}
+
+\newcommand*{\qnumber}[1]{\renewcommand\@qnumber{#1}}
+\newcommand*{\@qnumber}{10}
+
+
+
+% Table for self grading. 
+\newcounter{the@qnum}
+\newcommand{\jptest@answers@table}[1]{%
+  \renewcommand*{\arraystretch}{1.5}
+  \begin{tabular}{|P{1cm}|p{1cm}|}
+    \hline
+    \forloop{the@qnum}{1}{\value{the@qnum} < #1}{%
+      \arabic{the@qnum}. & \\ \hline}
+    \arabic{the@qnum}. & \\\hline
+  \end{tabular}
+}
+
+% Code to be executed after inputenc
+\AtEndPreamble{%
+  %% Non-breakable space (Emacs: C-x 8 SPC) 
+  \ifthenelse{\isundefined{\DeclareUnicodeCharacter}}{}{%
+    \DeclareUnicodeCharacter{00A0}{~}}
+  %% Load csquotes
+  \RequirePackage{csquotes}
+}
+
+
+\AtBeginDocument{%
+  \begingroup
+  \thispagestyle{empty}
+  \sffamily
+  \begin{center}
+    \scshape\LARGE \@subject \\[\baselineskip]
+    \Large\@testname \\
+    \@testdate
+    \vspace*{\baselineskip}
+  \end{center}
+  \begin{center}
+    %\sffamily%
+    \LARGE\bfseries\scshape%
+    No d\'{e} la vuelta a esta hoja hasta que se le indique    
+    \vspace*{2\baselineskip}
+  \end{center}
+  \begin{center}
+    \large%
+    \begin{minipage}{0.50\linewidth}
+      \centering%
+      \begin{itemize}
+      \item No entregue esta hoja al finalizar el test.
+      \item Aqu\'{\i} puede anotar sus respuestas: 
+      \end{itemize}
+      \vspace*{\baselineskip}
+      
+      \jptest@answers@table{\@qnumber}
+    \end{minipage}
+  \end{center}
+  \ClearDoublePage
+  \endgroup
+}
+
+
+\AtBeginDocument{%
+  \pagenumbering{arabic}%
+  \thispagestyle{first}%
+  \noindent\centering%
+  \setlength{\fboxsep}{0pt}%
+  \setlength{\fboxrule}{0pt}%
+%  \colorbox{black!10!white}{%
+    \begin{minipage}{0.975\linewidth}
+      \begin{flushleft}
+        %\large%
+        Apellido(s):\hspace*{1ex} {\color{black!25!white}\hrulefill}\\[\baselineskip]%
+        Nombre:\hspace*{1ex} {\color{black!25!white}\hrulefill}\\[\baselineskip]%
+        DNI/NIE:\hspace*{1ex} {\color{black!25!white}\rule{6cm}{0.4pt}\hfill}\hspace*{1ex}%
+        Grupo:\hspace*{1ex} {\color{black!25!white}\rule{2cm}{0.4pt}}%
+        %\rule{\linewidth}{0.4pt}
+      \end{flushleft}%
+    \end{minipage}%
+ % }
+      \vspace*{1\baselineskip}\color{black!72!white}%
+}
+
+
+\AtEndDocument{\ClearDoublePage}
+%    \end{macrocode}
+%
+% \Finale
+% \endinput
+
+
+% Local Variables:
+% mode: doctex
+% TeX-master: nil
+% End:
+
+
