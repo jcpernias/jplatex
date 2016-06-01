@@ -93,11 +93,8 @@
 %
 %
 %    \begin{macrocode}
-\DeclareOption*{%
-  \PassOptionsToClass{\CurrentOption}{article}%
-}
 \ProcessOptions\relax
-\LoadClass{article}
+\LoadClassWithOptions{article}
 
 % Babel: handle the problematic options of spanish
 \def\spanishoptions{es-noindentfirst,es-noitemize}
@@ -272,6 +269,7 @@ bindingoffset=0in, hcentering=true]{geometry}
     \end{minipage}%
  % }
       \vspace*{1\baselineskip}\color{black!72!white}%
+      \selectlanguage{spanish}
 }
 
 
