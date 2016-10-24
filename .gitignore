@@ -4,3 +4,4 @@ build/
 test.pdf
 jp.tds.zip
 *.rel
+**/.DS_Store

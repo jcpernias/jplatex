@@ -64,7 +64,7 @@ zip: $(pkgname).tds.zip
 
 $(pkgname).tds.zip: $(docs)
 	$(RM) $@
-	cd $(tdsrootdir) && find  -type f | zip -q -@  ../$@
+	cd $(tdsrootdir) && find . -type f -and -not -path '*/.*' | zip -q -@  ../$@
 
 .PHONY:
 install: zip
