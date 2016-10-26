@@ -93,17 +93,45 @@
 %
 % \section{Introduction}
 %
-% Put text here.
+% This package collects some macros that make easy to typeset some
+% math constructs.
 %
 % \section{Usage}
 %
-% Put text here.
+% \DescribeMacro{\mname} This macro is used to typeset names of
+% variables or functions in math mode. It uses |\textnormal| in order
+% to render the name with proper intercharacter spacing.
+%
+% \iffalse
+%<*example>
+% \fi
+\begin{source}
+  |cs[mname]|oarg[subscript]|marg[name]
+\end{source}
+% \iffalse
+%</example>
+% \fi
 % 
-% \DescribeMacro{\mname}
-% This macro does nothing.\index{naming|usage} It is merely an
-% example.  If this were a real macro, you would put a paragraph here
-% describing what the macro is supposed to do, what its mandatory and
-% optional arguments are, and so forth.
+% The name is typeset upright even if surrounding environment uses
+% italics or other font shape.
+%
+% \iffalse
+%<*example>
+% \fi
+\begin{example}
+  \[
+    \begin{array}{l}
+      \mname{UMg} \\
+      \mname[X]{UMg} \\
+      \mname*{UMg} \\
+      \mname*[X]{UMg}
+    \end{array}
+  \]
+\end{example}
+% \iffalse
+%</example>
+% \fi
+%
 %
 % \DescribeMacro{\widebar}
 % A replacement for \cs{bar}:
