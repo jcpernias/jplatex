@@ -53,3 +53,5 @@
 - [ ] Populate jpmicro
 - [ ] Add hooks allowing a user designing a cover sheet, the header
   and so on.
+- [ ] Environment documentation: correct the typing of environment
+  names.
